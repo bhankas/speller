@@ -3,8 +3,16 @@
  */
 
 #include <stdbool.h>
-
+#include <stdlib.h>
+#include <stdio.h>
 #include "dictionary.h"
+
+//define node structure
+typedef struct node
+{
+    bool is_word;
+    struct node *children[27];
+}node;
 
 /**
  * Returns true if word is in dictionary else false.
@@ -20,6 +28,44 @@ bool check(const char *word)
  */
 bool load(const char *dictionary)
 {
+    char word[20];
+    int i,alpha;
+    
+    //initialize starting node
+    node *root = malloc(sizeof(node));
+
+    FILE *dict = fopen(dictionary, "r");
+
+    while (fscanf(dict, "%s", word) != EOF)
+    {
+        //initialize position
+        node *move = root;
+
+        for(i=0 ; word[i] != '\0' ; i++)
+        {
+            alpha = (int)word[i] - 65;
+            // check if alpha is anything other than alphabets
+            if (!(alpha >=0 && alpha <= 25))
+            {
+                //put alpha to apostrophe
+                alpha = 26;
+            }
+            
+            //check if child node exists, if not malloc a new one and move to it
+            if(move -> children[alpha] == NULL)
+            {
+                move -> children[alpha] = malloc(sizeof(node));
+                move = move -> children[alpha];
+            }
+            else
+            {
+                move = move -> children[alpha];
+            }
+        }
+
+        move -> is_word =true;
+    }
+
     // TODO
     return false;
 }
