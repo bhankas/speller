@@ -15,7 +15,8 @@ typedef struct node
 }node;
 
 //initialize starting node
-node *root;
+struct node *root;
+unsigned int word_count = 0;
 
 /**
  * Returns true if word is in dictionary else false.
@@ -112,6 +113,7 @@ bool load(const char *dictionary)
 
         //if word is complete, mark final node so
         move -> is_word =true;
+        word_count++;
     }
 
     // TODO : May need to check for some conditions later, if need be.
@@ -123,8 +125,7 @@ bool load(const char *dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return word_count;
 }
 
 /**
