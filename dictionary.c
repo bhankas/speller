@@ -141,9 +141,6 @@ bool unload(void)
     unload2(move);
 
     return true;
-    
-    // TODO
-    //return false;
 }
 
 void unload2(node *move)
