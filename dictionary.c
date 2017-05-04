@@ -28,7 +28,7 @@ bool check(const char *word)
  */
 bool load(const char *dictionary)
 {
-    char word[20];
+    char word[25];
     int i,alpha;
     
     //initialize starting node
@@ -43,7 +43,7 @@ bool load(const char *dictionary)
 
         for(i=0 ; word[i] != '\0' ; i++)
         {
-            alpha = (int)word[i] - 65;
+            alpha = (int)word[i] - 97;
             // check if alpha is anything other than alphabets
             if (!(alpha >=0 && alpha <= 25))
             {
