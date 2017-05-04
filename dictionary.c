@@ -66,8 +66,8 @@ bool load(const char *dictionary)
         move -> is_word =true;
     }
 
-    // TODO
-    return false;
+    // TODO : May need to check for some conditions later, if need be.
+    return true;
 }
 
 /**
