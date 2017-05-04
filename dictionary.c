@@ -22,10 +22,50 @@ node *root;
  */
 bool check(const char *word)
 {
+    int i;
+    int alpha;
     
-    
-    // TODO
-    return false;
+    //point to root fr new word
+    node *move = root;
+
+    for(i=0 ; word[i] != '\0' ; i++)
+    {
+        if(word[i] >= 'A' && word[i] <= 'Z')
+         {
+             //for uppercase characters
+             alpha = word[i] - 'A';
+         }
+         else if(word[i] >= 'a' && word[i] <= 'z')
+         {
+             //for lowercase characters
+             alpha = word[i] - 'a';
+         }
+         else
+         {
+             //if not from characters, mark as apostrophe
+             alpha = 26;
+         }
+
+        //check if child node exists, if not word doesn't exist
+        if(move -> children[alpha] == NULL)
+        {
+            return false;
+        }
+        else    //move to next letter in word
+        {
+            move = move -> children[alpha];
+        }
+    }
+
+    //if word is complete, check if dictionary says so
+    if(move -> is_word == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }    
 }
 
 /**
@@ -33,11 +73,14 @@ bool check(const char *word)
  */
 bool load(const char *dictionary)
 {
+    //array to store word and other variables
     char word[25];
     int i,alpha;
 
+    //open file with file pointer
     FILE *dict = fopen(dictionary, "r");
 
+    //allocate space for root node
     root = malloc(sizeof(node));
 
     while (fscanf(dict, "%s", word) != EOF)
@@ -67,6 +110,7 @@ bool load(const char *dictionary)
             }
         }
 
+        //if word is complete, mark final node so
         move -> is_word =true;
     }
 
