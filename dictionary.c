@@ -18,6 +18,9 @@ typedef struct node
 struct node *root;
 unsigned int word_count = 0;
 
+//unload2 for being able to call recursively
+void unload2(node *move);
+
 /**
  * Returns true if word is in dictionary else false.
  */
@@ -133,6 +136,35 @@ unsigned int size(void)
  */
 bool unload(void)
 {
+    node *move = root;
+
+    unload2(move);
+
+    return true;
+    
     // TODO
-    return false;
+    //return false;
+}
+
+void unload2(node *move)
+{
+    int i;
+    int null_count = 0;
+    
+    for (i = 0; i < 26; i++)
+    {
+        if (move -> children[i] == NULL)
+        {
+            null_count++;
+        }
+        else
+        {
+            unload2(move -> children[i]);
+        }
+    }
+
+    if (null_count == 26)
+    {
+        free(move);
+    }
 }
