@@ -15,7 +15,7 @@ typedef struct node
 }node;
 
 //initialize starting node
-node root;
+node *root;
 
 /**
  * Returns true if word is in dictionary else false.
@@ -38,10 +38,12 @@ bool load(const char *dictionary)
 
     FILE *dict = fopen(dictionary, "r");
 
+    root = malloc(sizeof(node));
+
     while (fscanf(dict, "%s", word) != EOF)
-    {
+    {        
         //initialize position
-        node *move = &root;
+        node *move = root;
 
         for(i=0 ; word[i] != '\0' ; i++)
         {
