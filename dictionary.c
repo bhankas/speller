@@ -75,7 +75,7 @@ bool check(const char *word)
 bool load(const char *dictionary)
 {
     //array to store word and other variables
-    char word[25];
+    char word[45];
     int i,alpha;
 
     //open file with file pointer
